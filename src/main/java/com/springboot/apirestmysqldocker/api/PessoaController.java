@@ -46,4 +46,10 @@ public class PessoaController {
     public void deletePerson(@PathVariable("id") Long id) {
         pessoaService.deletePerson(id);
     }
+
+    @GetMapping("/filter")
+    public List<PessoaDTO> findByName(@RequestParam("name") String name){
+        return pessoaService.findByName(name);
+    }
+
 }

@@ -50,4 +50,11 @@ public class PessoaService {
     public void deletePerson(Long id) {
         pessoaRepository.deleteById(id);
     }
+
+    public List<PessoaDTO> findByName(String name) {
+        var pessoas = pessoaRepository.findByNomeContains(name);
+        return pessoas.stream()
+                .map(PessoaDTO::converter)
+                .collect(Collectors.toList());
+    }
 }
