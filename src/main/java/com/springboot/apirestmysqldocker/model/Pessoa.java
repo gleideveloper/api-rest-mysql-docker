@@ -18,4 +18,6 @@ public class Pessoa {
     private String nome;
     @Column(name = "sobrenome")
     private String sobrenome;
+    @Column(name = "endereco")
+    private String endereco;
 }
