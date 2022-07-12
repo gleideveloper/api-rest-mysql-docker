@@ -35,15 +35,19 @@ public class PessoaService {
         PessoaDTO.converter(pessoaRepository.save(pessoa));
     }
 
-    public void updatePerson(Long id, Pessoa pessoa) {
+    public PessoaDTO updatePerson(Long id, Pessoa pessoa) {
         Assert.notNull(id,"Não foi possível atualizar o registro");
         var p = pessoaRepository.findById(id);
         if(p.isPresent()){
             p.get().setNome(pessoa.getNome());
             p.get().setSobrenome(pessoa.getSobrenome());
             pessoaRepository.save(p.get());
-        }else{
-            throw new ObjectNotFoundException("Pessoa não encontrada!!!");
+            return PessoaDTO.converter(p.get());
         }
+        throw new ObjectNotFoundException("Pessoa não encontrada!!!");
+    }
+
+    public void deletePerson(Long id) {
+        pessoaRepository.deleteById(id);
     }
 }

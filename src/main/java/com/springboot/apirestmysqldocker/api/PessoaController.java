@@ -35,7 +35,15 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public void updatePerson(@PathVariable("id") long id, @RequestBody Pessoa pessoa) {
-         pessoaService.updatePerson(id, pessoa);
+    public ResponseEntity<PessoaDTO> updatePerson(@PathVariable("id") long id, @RequestBody Pessoa pessoa) {
+         var p = pessoaService.updatePerson(id, pessoa);
+        return p != null ?
+                ResponseEntity.ok(p) :
+                ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePerson(@PathVariable("id") Long id) {
+        pessoaService.deletePerson(id);
     }
 }
